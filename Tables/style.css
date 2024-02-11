@@ -1,0 +1,67 @@
+*::before,
+*::after,
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.4rem;
+    margin: 2.2rem;
+}
+
+table {
+    table-layout: fixed;
+    width: 142.2rem;
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    margin: 2.0rem auto;
+}
+
+
+th,
+td {
+    padding: 1.0rem 2.0rem;
+    text-align: center;
+    border:  1px solid rgb(200, 200, 200);
+}
+
+tr {
+    border: 1px solid rgb(255, 255, 255);
+}
+
+th {
+    font-weight: 700;
+    background-color: rgb(235, 235, 235);
+}
+
+tfoot {
+    font-weight: 700;
+    background-color: rgb(235, 235, 235);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f5f5f5;
+}
+
+caption {
+    padding: 1.2rem;
+}
+
+thead th:nth-child(11) {
+    width: 17%;
+}
+
+thead th:nth-child(1) {
+    width: 16%;
+}
+
+tbody tr:nth-child(9) {
+    height: 8.0rem;
+}
