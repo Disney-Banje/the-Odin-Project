@@ -1,0 +1,115 @@
+html {
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    background-color: #222831;
+    color: #ddd;
+    text-align: center;
+    position: relative;
+}
+
+.game_title {
+    padding: 2.2rem;
+    background-color: #111720;
+}
+
+.blur {
+    filter: blur(8px);
+}
+
+.active {
+    display: none;
+}
+
+h1 {
+    font-size: 3.4rem;
+    color: #fac650;
+    text-transform: uppercase;
+}
+
+.intro_message {
+    margin-top: 1.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+.players_selection {
+    width: 30.5rem;
+    margin: 1.8rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr
+}
+
+.player_pick,
+.computer_pick {
+    font-size: 4.9rem;
+}
+
+.hand_selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.2rem;
+    width: 35.0rem;
+    margin: 2.5rem auto;
+}
+
+.sign {
+    font-size: 5.8rem;
+}
+
+.btn {
+    background-color: rgba(128, 128, 128, 0.255);
+    padding: 2.0rem;
+    border-radius: 1.2rem;
+    cursor: pointer;
+}
+
+
+.restart_game {
+    background-color: #111720;
+    width: 22.8rem;
+    height: fit-content;
+    padding: 1.5rem 4.5rem;
+    border-radius: 1.2rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1000;
+    box-shadow: 0.2rem 1.5rem 2.2rem #111720;
+}
+
+.restart_game p {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.restart_btn {
+    background-color: #ddd;
+    color: #111720;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0.8rem;
+    margin-top: 1.2rem;
+}
