@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 html {
     font-size: 62.5%;
 }
@@ -19,6 +21,7 @@ button {
 
 body {
     font-size: 1.6rem;
+    font-family: "Raleway", sans-serif;
     line-height: 1.5;
     background-color: #222831;
     color: #ddd;
@@ -40,7 +43,9 @@ body {
 }
 
 h1 {
-    font-size: 3.4rem;
+    font-weight: 900;
+    font-size: 3.5rem;
+    font-weight: 700;
     color: #fac650;
     text-transform: uppercase;
 }

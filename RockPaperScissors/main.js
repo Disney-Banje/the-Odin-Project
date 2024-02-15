@@ -102,39 +102,22 @@ function displayPlayerSelection(playerSelection, computerSelection) {
     }
 }
 
-// Display Game Winner
-function gameWinner() {
-    if (playerScore === 5) {
-        winnerDisplay.textContent = 'You have Won';
-    } else if (computerScore === 5) {
-         winnerDisplay.textContent = 'You have lost';
-    }
-
+function gameWinner(playerScore) {
+    return playerScore === 5 ? winnerDisplay.textContent = "You have won!" : winnerDisplay.textContent = "You have lost!";
 }
 
-// Game maximum number of rounds to play.. & restart functionality..
-function gameMaxRounds(playerScore, computerScore) {
-    if (playerScore === 5 || computerScore === 5) {
+// Game over 
+function gameOver() {
+    return playerScore === 5 || computerScore === 5;
+}
+
+function restartGame() {
+    if (gameOver()) {
         gameContainer.classList.add("blur");
         restartContainer.classList.remove("active");
-
-        // restart game button 
-        restartButton.addEventListener("click", () => {
-            restartContainer.classList.add("active");
-            gameContainer.classList.remove("blur");
-            roundState.textContent = "Choose your weapon";
-            roundMessage.textContent = "First to score 5 points wins the game";
-            playerScoreDisplay.textContent = "Player: 0";
-            computerScoreDisplay.textContent = "Computer: 0";
-            playerPick.textContent = "❔";
-            computerPick.textContent = "❔";
-
-            playerScore = 0;
-            computerScore = 0;
-            roundWinner = '';
-        })
+        gameWinner(playerScore);
     }
-} 
+}
 
 
 // Commbining all the funcitions to generate the full gameplay...
@@ -142,7 +125,21 @@ function fireGame(playerSelection) {
     const computerSelection = computerHandChoice();
     roundGameplay(playerSelection, computerSelection);
     displayPlayerSelection(playerSelection, computerSelection);
-    gameMaxRounds(playerScore, computerScore);
+    restartGame();
+    // Restart game
+    restartButton.addEventListener("click", () => {
+        playerScore = 0;
+        computerScore = 0;
+        roundWinner = "";
+        roundState.textContent = 'Choose you weapon';
+        roundMessage.textContent = 'First to score 5 points wins the game';
+        playerPick.textContent = '❔';
+        computerPick.textContent = '❔';
+        playerScoreDisplay.textContent = 'Player: 0';
+        computerScoreDisplay.textContent = 'Computer: 0';
+        gameContainer.classList.remove('blur');
+        restartContainer.classList.add('active');
+    })
 }
 
 
