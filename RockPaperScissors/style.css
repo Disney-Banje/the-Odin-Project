@@ -19,7 +19,15 @@ button {
     cursor: pointer;
 }
 
+input {
+    text-align: center;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+}
+
 body {
+    min-height: 100vh;
     font-size: 1.6rem;
     font-family: "Raleway", sans-serif;
     line-height: 1.5;
@@ -27,6 +35,9 @@ body {
     color: #ddd;
     text-align: center;
     position: relative;
+    display: grid;
+    place-content: center;
+    padding: 2.5rem;
 }
 
 .game_title {
@@ -38,8 +49,20 @@ body {
     filter: blur(8px);
 }
 
+strong {
+    color: #fac650;
+}
+
 .active {
     display: none;
+}
+
+.btn-save {
+    background-color: #fac650;
+    align-self: center;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.8rem;
+    font-weight: 700;
 }
 
 h1 {
@@ -117,4 +140,10 @@ h2 {
     padding: 0.8rem 1.6rem;
     border-radius: 0.8rem;
     margin-top: 1.2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
