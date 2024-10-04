@@ -1,163 +1,4 @@
-// // UI elements that we will be interacting with..
-// const playerPick = document.querySelector('.player_pick');
-// const computerPick = document.querySelector('.computer_pick');
-// const playerScoreDisplay = document.querySelector('.player_score');
-// const computerScoreDisplay = document.querySelector('.computer_score');
-// const buttons= document.querySelectorAll(".btn");
-// const roundState = document.querySelector('.round_state');
-// const roundMessage = document.querySelector('.round_message');
-// const gameContainer = document.querySelector('.game_board');
-// const restartContainer = document.querySelector('.restart_game');
-// const restartButton = document.querySelector('.restart_btn');
-// const winnerDisplay = document.querySelector('.game_winner');
-
-// // computer choice generation
-// function computerHandChoice() {
-//     const randomNumber = Math.floor(Math.random() * 3);
-    
-//     // give each random number a hand choice..
-//     switch (randomNumber) {
-//         case 0:
-//             return 'rock';
-//             break;
-//         case 1:
-//             return 'paper';
-//             break;
-//         case 2:
-//             return 'scissors';
-//             break;
-//     }
-// }
-
-// // Initialize players scores and round winner message...
-// let playerScore = 0;
-// let computerScore = 0;
-// let roundWinner = "";
-
-// // Rock paper and scissors round game
-// function  roundGameplay(playerSelection, computerSelection) {
-//     if (playerSelection === computerSelection) {
-//         roundWinner = 'Tie';
-//     } else if (
-//         (playerSelection === 'rock' && computerSelection === 'scissors') ||
-//         (playerSelection === 'paper' && computerSelection === 'rock') ||
-//         (playerSelection === 'scissors' && computerSelection === 'paper')) {
-//         roundWinner = 'Player'
-//         playerScore++;
-//     } else if (
-//         (computerSelection === 'rock' && playerSelection === 'scissors') ||
-//         (computerSelection === 'paper' && playerSelection === 'rock') ||
-//         (computerSelection === 'scissors' && playerSelection === 'paper')) {
-//         roundWinner = 'Computer';
-//         computerScore++;
-//     } 
-
-//     roundDeliberation(roundWinner, playerSelection, computerSelection);
-// }
-
-
-// // Game deliberation function will be displaying a message about who won the round..
-// function roundDeliberation(roundWinner, playerSelection, computerSelection) {
-//     if (roundWinner === 'Tie') {
-//         roundState.textContent = "It's a tie!";
-//         roundMessage.textContent = `${playerSelection} ties with ${computerSelection}`;
-//     } else if (roundWinner === 'Player') {
-//         roundState.textContent = 'You have won!';
-//         roundMessage.textContent = `${playerSelection} beats ${computerSelection}`;
-//     } else if (roundWinner === 'Computer') {
-//         roundState.textContent = 'You have lost!';
-//         roundMessage.textContent = `${playerSelection} is beaten by ${computerSelection}`;
-//     }
-
-//     playerScoreDisplay.textContent = `Player: ${playerScore}`;
-//     computerScoreDisplay.textContent = `Computer: ${computerScore}`;
-// }
-
-// // function to display both the player and the computer hand selection...
-// function displayPlayerSelection(playerSelection, computerSelection) {
-//     // player hand selection...
-//     switch (playerSelection) {
-//         case 'rock':
-//            playerPick.textContent = '✊';
-//            break;
-//         case 'paper':
-//             playerPick.textContent = '✋';
-//             break;
-//         case 'scissors':
-//             playerPick.textContent = '✌';
-//             break; 
-//     }
-
-//     // Computer hand selection..
-//     switch (computerSelection) {
-//         case 'rock':
-//             computerPick.textContent = '✊';
-//             break; 
-//         case 'paper':
-//             computerPick.textContent = '✋';
-//             break; 
-//         case 'scissors':
-//             computerPick.textContent = '✌';
-//             break;
-//     }
-// }
-
-// function gameWinner(playerScore) {
-//     return playerScore === 5 ? winnerDisplay.textContent = "You have won!" : winnerDisplay.textContent = "You have lost!";
-// }
-
-// // Game over 
-// function gameOver() {
-//     return playerScore === 5 || computerScore === 5;
-// }
-
-// function restartGame() {
-//     if (gameOver()) {
-//         gameContainer.classList.add("blur");
-//         restartContainer.classList.remove("active");
-//         gameWinner(playerScore);
-//     }
-// }
-
-
-// // Commbining all the funcitions to generate the full gameplay...
-// function fireGame(playerSelection) {
-//     const computerSelection = computerHandChoice();
-//     roundGameplay(playerSelection, computerSelection);
-//     displayPlayerSelection(playerSelection, computerSelection);
-//     restartGame();
-//     // Restart game
-//     restartButton.addEventListener("click", () => {
-//         playerScore = 0;
-//         computerScore = 0;
-//         roundWinner = "";
-//         roundState.textContent = 'Choose you weapon';
-//         roundMessage.textContent = 'First to score 5 points wins the game';
-//         playerPick.textContent = '❔';
-//         computerPick.textContent = '❔';
-//         playerScoreDisplay.textContent = 'Player: 0';
-//         computerScoreDisplay.textContent = 'Computer: 0';
-//         gameContainer.classList.remove('blur');
-//         restartContainer.classList.add('active');
-//     })
-// }
-
-
-// // Event listeners for the UI buttons..
-// buttons.forEach(button => {
-//     button.addEventListener('click', () => {
-//         if (button.classList.contains('rock')) {
-//             fireGame('rock');
-//         } else if (button.classList.contains('paper')) {
-//             fireGame('paper');
-//         } else if (button.classList.contains('scissors')) {
-//             fireGame('scissors');
-//         }
-//     })
-// })
-
 document.addEventListener('DOMContentLoaded', () => {
-
     const container = document.querySelector('#container');
 
     let playerName;
@@ -218,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             container.removeChild(message);
         }, 4900);
     }
-    container.appendChild(createForm());
+    // container.appendChild(createForm());
+    container.appendChild(createGameBoard());
 
 
     // Create Game design..
@@ -263,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
         computerPick.classList.add('computer_pick');
         computerPick.textContent = '❔';
         const playerScoreDisplay  = document.createElement('p');
-        playerScore.classList.add('player_score');
-        playerScore.textContent = `${playerName}: 0`;
+        playerScoreDisplay.classList.add('player_score');
+        playerScoreDisplay.textContent = `${playerName}: 0`;
         const computerScoreDisplay = document.createElement('p');
-        computerScore.classList.add('computer_score');
-        computerScore.textContent = `${computerName}: 0`;
+        computerScoreDisplay.classList.add('computer_score');
+        computerScoreDisplay.textContent = `${computerName}: 0`;
 
         playerSelection.appendChild(playerPick);
         playerSelection.appendChild(computerPick);
@@ -353,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function GameRound(playerSelection, computerSelection) {
+    function gameRound(playerSelection, computerSelection) {
         if (playerSelection === computerSelection) {
             roundWinner = 'Tie';
         } else if (
@@ -361,8 +203,38 @@ document.addEventListener('DOMContentLoaded', () => {
             (playerSelection === 'scissors' && computerSelection === 'paper') ||
             (playerSelection === 'paper' && computerSelection === 'rock')
         ) {
-            roundWinner = "It's win";
+            roundWinner = "Player";
             playerScore++;
+        } else if (
+            (computerSelection === 'rock' && playerSelection === 'scissors') ||
+            (computerSelection === 'scissors' && playerSelection === 'paper') ||
+            (computerSelection === 'paper' && playerSelection === 'rock') 
+        ) {
+            roundWinner = 'Computer';
+            computerScore++;
+        }
+    }
+
+    function roundDeliberation(roundWinner, roundState, roundMessage) {
+        if (roundWinner === 'Tie') {
+            roundState.textContent = "It's a tie!";
+            roundMessage.textContent = `Ouuf  ${playerName}, are matching with ${computerName}`;
+        } else if (roundWinner === 'Player') {
+            roundState.textContent = 'Yeaahhh! You got this one.';
+            roundMessage.textContent = `${playerName}, keep it up you are almost there.`;
+        } else if (roundWinner === 'Computer') {
+            roundState.textContent = `OOhhhh, it's a loss`;
+            roundMessage.textContent = `${playerName}, do not let ${computerName} win this batle.`;
+        }
+    }
+
+    function roundLimit(playerScore, computerScore) {
+        return playerScore === 5 || computerScore === 5;
+    }
+
+    function gameOver() {
+        if (roundLimit()) {
+            restartGame.classList.toggle('active');
         }
     }
 
