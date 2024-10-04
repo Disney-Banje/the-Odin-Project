@@ -213,6 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
             roundWinner = 'Computer';
             computerScore++;
         }
+
+        roundDeliberation(roundWinner)
     }
 
     function roundDeliberation(roundWinner, roundState, roundMessage) {
@@ -235,6 +237,32 @@ document.addEventListener('DOMContentLoaded', () => {
     function gameOver() {
         if (roundLimit()) {
             restartGame.classList.toggle('active');
+        }
+    }
+
+    function displayHandSelection(playerSelection, computerSelection) {
+        switch (playerSelection) {
+            case 'rock': 
+                playerPick.textContent = '✊';
+                break;
+            case 'paper': 
+                playerPick.textContent = '✋';
+                break;
+            case 'scissors':
+                playerPick.textContent = '✌';
+                break;
+        }
+
+        switch (computerSelection) {
+            case 'rock': 
+                computerPick.textContent = '✊';
+                break;
+            case 'paper': 
+                computerPick.textContent = '✋';
+                break;
+            case 'scissors':
+                computerPick.textContent = '✌';
+                break;
         }
     }
 
