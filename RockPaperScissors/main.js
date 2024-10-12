@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const app = document.querySelector('#app');
     const container = document.querySelector('#container');
 
     let playerName;
@@ -8,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let roundWinner = '';
 
 
+    // Creating the Game Ui components
+
+    // Creating a form to register the player custome made name.
     function createForm() {
         const form = document.createElement('form');
         const message = document.createElement('p');
@@ -28,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // console.log(form);
 
+        // Adding A delay time before displaying the game board..
         form.addEventListener('submit', (event) => {
             if (input.value == '') {
                 alert('Please enter your name');
@@ -48,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return form;
     }
 
+
+    // Creating a Welcome message after the user has entered his name, before playing the game...
     function createWelcomeMessage() {
         const message = document.createElement('p');
         message.innerHTML = `
@@ -62,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(createForm());
 
 
-    // Create Game design..
+    // Create the game board Ui design. This all the component present inside the game and will be used to react to the change of the game state.
     function createGameBoard() {
         const gameContainer = document.createElement('div');
         gameContainer.classList.add('game_container');
@@ -137,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
         
+        // Directly adding the event listeners on to the buttons to start the game...
         handIcons.forEach(item => {
             const button = document.createElement('button');
             button.addEventListener('click', (event) => {
@@ -167,14 +175,29 @@ document.addEventListener('DOMContentLoaded', () => {
         gameWinner.textContent = 'Play again';
         const button = document.createElement('button');
         button.classList.add('restart_btn');
+        button.textContent = 'Restart';
         restartGame.appendChild(gameWinner);
         restartGame.appendChild(button);    
-        gameContainer.appendChild(restartGame);
+        document.body.appendChild(restartGame);
 
         return gameContainer;
 
     }
 
+
+
+
+
+    // THIS SECTION BELOW IS THE BEHIND THE SCENE, THE FUNCTIONAL OPERATION THAT ALLOW THE USER TO PLAY AGAINST THE COMPUTER...
+
+
+    // General function to start the game....
+    function fireGame(playerSelection) {
+        const computerSelection = computerHandChoice();
+        gameRound(playerSelection, computerSelection);
+        displayHandSelection(playerSelection, computerSelection);
+        gameOver();
+    }
 
 
     // Computer selection choice
@@ -197,58 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function gameRound(playerSelection, computerSelection) {
-        if (playerSelection === computerSelection) {
-            roundWinner = 'Tie';
-        } else if (
-            (playerSelection === 'rock' && computerSelection === 'scissors') ||
-            (playerSelection === 'scissors' && computerSelection === 'paper') ||
-            (playerSelection === 'paper' && computerSelection === 'rock')
-        ) {
-            roundWinner = "Player";
-            playerScore++;
-        } else if (
-            (computerSelection === 'rock' && playerSelection === 'scissors') ||
-            (computerSelection === 'scissors' && playerSelection === 'paper') ||
-            (computerSelection === 'paper' && playerSelection === 'rock') 
-        ) {
-            roundWinner = 'Computer';
-            computerScore++;
-        }
 
-        const playerScoreDisplay = document.querySelector('.player_score');
-        const computerScoreDisplay = document.querySelector('.computer_score');
-        playerScoreDisplay.textContent = `${playerName}: ${playerScore}`;
-        computerScoreDisplay.textContent = `${computerName}: ${computerScore}`;
-        roundDeliberation(roundWinner)
-        gameOver();
-    }
 
-    function roundDeliberation(roundWinner) {
-        const roundState = document.querySelector('.round_state');
-        const roundMessage = document.querySelector('.round_message');
-        if (roundWinner === 'Tie') {
-            roundState.textContent = "It's a tie!";
-            roundMessage.textContent = `Ouuf  ${playerName}, are matching with ${computerName}`;
-        } else if (roundWinner === 'Player') {
-            roundState.textContent = 'Yeaahhh! You got this one.';
-            roundMessage.textContent = `${playerName}, keep it up you are almost there.`;
-        } else if (roundWinner === 'Computer') {
-            roundState.textContent = `OOhhhh, it's a loss`;
-            roundMessage.textContent = `${playerName}, do not let ${computerName} win this batle.`;
-        }
-    }
-
-    function roundLimit(playerScore, computerScore) {
-        return playerScore === 5 || computerScore === 5;
-    }
-
-    function gameOver() {
-        if (roundLimit()) {
-            restartGame.classList.toggle('active');
-        }
-    }
-
+    // Function used to display the players hand pick on the user interface...
     function displayHandSelection(playerSelection, computerSelection) {
         const playerPick = document.querySelector('.player_pick');
         const computerPick = document.querySelector('.computer_pick');
@@ -277,11 +251,87 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function fireGame(playerSelection) {
-        const computerSelection = computerHandChoice();
-        gameRound(playerSelection, computerSelection);
-        displayHandSelection(playerSelection, computerSelection);
-        // gameOver();
+
+
+    // Function that takes care of each game round player descision, to define who has won and who has lost...
+    function gameRound(playerSelection, computerSelection) {
+        if (playerSelection === computerSelection) {
+            roundWinner = 'Tie';
+        } else if (
+            (playerSelection === 'rock' && computerSelection === 'scissors') ||
+            (playerSelection === 'scissors' && computerSelection === 'paper') ||
+            (playerSelection === 'paper' && computerSelection === 'rock')
+        ) {
+            roundWinner = "Player";
+            playerScore++;
+        } else if (
+            (computerSelection === 'rock' && playerSelection === 'scissors') ||
+            (computerSelection === 'scissors' && playerSelection === 'paper') ||
+            (computerSelection === 'paper' && playerSelection === 'rock') 
+        ) {
+            roundWinner = 'Computer';
+            computerScore++;
+        }
+
+        const playerScoreDisplay = document.querySelector('.player_score');
+        const computerScoreDisplay = document.querySelector('.computer_score');
+        playerScoreDisplay.textContent = `${playerName}: ${playerScore}`;
+        computerScoreDisplay.textContent = `${computerName}: ${computerScore}`;
+        roundDeliberation(roundWinner);
+    }
+
+
+    // Function to display on the user interface a deliberation message of whose the previous round winner...
+    function roundDeliberation(roundWinner) {
+        const roundState = document.querySelector('.round_state');
+        const roundMessage = document.querySelector('.round_message');
+        if (roundWinner === 'Tie') {
+            roundState.textContent = "It's a tie!";
+            roundMessage.textContent = `Ouuf  ${playerName}, are matching with ${computerName}`;
+        } else if (roundWinner === 'Player') {
+            roundState.textContent = 'Yeaahhh! You got this one.';
+            roundMessage.textContent = `${playerName}, keep it up you are almost there.`;
+        } else if (roundWinner === 'Computer') {
+            roundState.textContent = `OOhhhh, it's a loss`;
+            roundMessage.textContent = `${playerName}, do not let ${computerName} win this batle.`;
+        }
+    }
+
+
+    // Function Checking if the players have reached the limit of 5 rounds..
+    function roundLimit() {
+        return playerScore === 5 || computerScore === 5;
+    }
+
+
+    // Function displaying a floating message of the game outcome....
+    function gameWinner() {
+        const gameWinner = document.querySelector('.game_winner');
+        playerScore === 5 ? gameWinner.textContent = 'You have won!!' : gameWinner.textContent = 'You have lost';
+    }
+
+
+
+    // Function used to restart the user interface components to their initial state once the game has been completed...
+    function gameOver() {
+        const restartGame = document.querySelector('.restart_game');
+        const restartButton = document.querySelector('.restart_btn');
+        if (roundLimit()) {
+            restartGame.classList.toggle('active');
+            app.classList.toggle('blur');
+            gameWinner();
+            restartButton.addEventListener('click', () => {
+                document.querySelector('.round_state').textContent = 'Choose your weapon';
+                document.querySelector('.round_message').textContent = 'First to score 5 points wins the game.';
+                document.querySelector('.player_pick').textContent = '❔';
+                document.querySelector('.computer_pick').textContent = '❔';
+                document.querySelector('.player_score').textContent = `${playerName}: 0`;
+                document.querySelector('.computer_score').textContent = `${computerName}: 0`;
+                restartGame.classList.toggle('active');
+                app.classList.toggle('blur');
+
+            });
+        }
     }
 
 
