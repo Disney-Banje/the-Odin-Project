@@ -59,8 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.removeChild(message);
         }, 4900);
     }
-    // container.appendChild(createForm());
-    container.appendChild(createGameBoard());
+    container.appendChild(createForm());
 
 
     // Create Game design..
