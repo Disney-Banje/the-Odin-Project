@@ -287,12 +287,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const roundMessage = document.querySelector('.round_message');
         if (roundWinner === 'Tie') {
             roundState.textContent = "It's a tie!";
+            roundState.style.color = 'white';
             roundMessage.textContent = `Ouuf  ${playerName}, are matching with ${computerName}`;
         } else if (roundWinner === 'Player') {
             roundState.textContent = 'Yeaahhh! You got this one.';
+            roundState.style.color = '#177b4d';
             roundMessage.textContent = `${playerName}, keep it up you are almost there.`;
         } else if (roundWinner === 'Computer') {
             roundState.textContent = `OOhhhh, it's a loss`;
+            roundState.style.color = '#c44e4f';
             roundMessage.textContent = `${playerName}, do not let ${computerName} win this batle.`;
         }
     }
@@ -321,7 +324,9 @@ document.addEventListener('DOMContentLoaded', () => {
             app.classList.toggle('blur');
             gameWinner();
             restartButton.addEventListener('click', () => {
-                document.querySelector('.round_state').textContent = 'Choose your weapon';
+                const roundState = document.querySelector('.round_state');
+                roundState.style.color = 'white';
+                roundState.textContent = 'Choose your weapon';
                 document.querySelector('.round_message').textContent = 'First to score 5 points wins the game.';
                 document.querySelector('.player_pick').textContent = '❔';
                 document.querySelector('.computer_pick').textContent = '❔';
