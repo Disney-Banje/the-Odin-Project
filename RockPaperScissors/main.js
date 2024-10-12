@@ -142,11 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (event) => {
                 // console.log(event.target.innerHTML);
                 if (event.target.classList.contains('rock')) {
-                    console.log('rock element clicked');
+                    // console.log('rock element clicked');
+                    fireGame('rock');
                 } else if (event.target.classList.contains('paper')) {
-                    console.log('paper element clicked');
+                    // console.log('paper element clicked');
+                    fireGame('paper');
                 } else if (event.target.classList.contains('scissors')) {
-                    console.log('scissors element clicked');
+                    // console.log('scissors element clicked');
+                    fireGame('scissors');
                 }
             });
             button.classList.add('btn', item.signTitle);
@@ -213,10 +216,17 @@ document.addEventListener('DOMContentLoaded', () => {
             computerScore++;
         }
 
+        const playerScoreDisplay = document.querySelector('.player_score');
+        const computerScoreDisplay = document.querySelector('.computer_score');
+        playerScoreDisplay.textContent = `${playerName}: ${playerScore}`;
+        computerScoreDisplay.textContent = `${computerName}: ${computerScore}`;
         roundDeliberation(roundWinner)
+        gameOver();
     }
 
-    function roundDeliberation(roundWinner, roundState, roundMessage) {
+    function roundDeliberation(roundWinner) {
+        const roundState = document.querySelector('.round_state');
+        const roundMessage = document.querySelector('.round_message');
         if (roundWinner === 'Tie') {
             roundState.textContent = "It's a tie!";
             roundMessage.textContent = `Ouuf  ${playerName}, are matching with ${computerName}`;
@@ -240,6 +250,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayHandSelection(playerSelection, computerSelection) {
+        const playerPick = document.querySelector('.player_pick');
+        const computerPick = document.querySelector('.computer_pick');
         switch (playerSelection) {
             case 'rock': 
                 playerPick.textContent = '✊';
@@ -263,6 +275,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 computerPick.textContent = '✌';
                 break;
         }
+    }
+
+    function fireGame(playerSelection) {
+        const computerSelection = computerHandChoice();
+        gameRound(playerSelection, computerSelection);
+        displayHandSelection(playerSelection, computerSelection);
+        // gameOver();
     }
 
 
