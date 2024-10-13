@@ -119,11 +119,21 @@ h2 {
     border: 0.9rem solid #fac650;
     position: absolute;
     z-index: 100;
-    transition: all 250ms ease-in-out;
 }
 
 .btn:hover {
-    transform: rotate(35deg);
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        box-shadow: 0 0 0 0px rgba(24, 157, 255, 0.2);
+    }
+
+    100% {
+        box-shadow: 0 0 0 20px rgba(24, 157, 255, 0);
+    }
+
 }
 
 .rock {
