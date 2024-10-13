@@ -27,6 +27,7 @@ input {
 }
 
 body {
+    min-width: 375px;
     min-height: 100vh;
     font-size: 1.6rem;
     font-family: "Raleway", sans-serif;
