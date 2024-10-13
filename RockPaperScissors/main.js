@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Creating the Game Ui components
 
-    // Creating a form to register the player custome made name.
+    // Creating a form to register the player custom made name.
     function createForm() {
         const form = document.createElement('form');
         const message = document.createElement('p');
@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         form.appendChild(label);
         form.appendChild(button);
 
-        // console.log(form);
 
         // Adding A delay time before displaying the game board..
         form.addEventListener('submit', (event) => {
@@ -47,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     container.appendChild(createGameBoard());
                 }, 4909);
             }
-            // console.log(playerName);
         })
 
         return form;
@@ -63,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(message);
 
         setTimeout(() => {
-            container.removeChild(message);
+            container.removeChild(message); // A timeout function to make the message disappear
         }, 4900);
     }
     container.appendChild(createForm());
@@ -148,15 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
         handIcons.forEach(item => {
             const button = document.createElement('button');
             button.addEventListener('click', (event) => {
-                // console.log(event.target.innerHTML);
                 if (event.target.classList.contains('rock')) {
-                    // console.log('rock element clicked');
                     fireGame('rock');
                 } else if (event.target.classList.contains('paper')) {
-                    // console.log('paper element clicked');
                     fireGame('paper');
                 } else if (event.target.classList.contains('scissors')) {
-                    // console.log('scissors element clicked');
                     fireGame('scissors');
                 }
             });
@@ -176,10 +170,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const button = document.createElement('button');
         button.classList.add('restart_btn');
         button.textContent = 'Restart';
+        button.addEventListener('click', resetGame);
         restartGame.appendChild(gameWinner);
         restartGame.appendChild(button);    
         document.body.appendChild(restartGame);
-
         return gameContainer;
 
     }
@@ -320,23 +314,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const restartGame = document.querySelector('.restart_game');
         const restartButton = document.querySelector('.restart_btn');
         if (roundLimit()) {
-            restartGame.classList.toggle('active');
-            app.classList.toggle('blur');
+            restartGame.classList.remove('active');
+            app.classList.add('blur');
             gameWinner();
-            restartButton.addEventListener('click', () => {
-                const roundState = document.querySelector('.round_state');
-                roundState.style.color = 'white';
-                roundState.textContent = 'Choose your weapon';
-                document.querySelector('.round_message').textContent = 'First to score 5 points wins the game.';
-                document.querySelector('.player_pick').textContent = '❔';
-                document.querySelector('.computer_pick').textContent = '❔';
-                document.querySelector('.player_score').textContent = `${playerName}: 0`;
-                document.querySelector('.computer_score').textContent = `${computerName}: 0`;
-                restartGame.classList.toggle('active');
-                app.classList.toggle('blur');
-
-            });
         }
+    }
+
+
+
+    // Function to reset the game state...
+    function resetGame() {
+        playerScore = 0;
+        computerScore = 0;
+        const playerPick = document.querySelector('.player_pick');
+        const computerPick = document.querySelector('.computer_pick');
+        const playerScoreDisplay = document.querySelector('.player_score');
+        const computerScoreDisplay = document.querySelector('.computer_score');
+        const roundState = document.querySelector('.round_state');
+        const roundMessage = document.querySelector('.round_message');
+        playerPick.textContent = '❔';
+        computerPick.textContent = '❔';
+        playerScoreDisplay.textContent = `${playerName}: 0`;
+        computerScoreDisplay.textContent = `${computerName}: 0`;
+        roundState.textContent = 'Choose your weapon';
+        roundState.style.color = 'white';
+        roundMessage.textContent = 'First to score 5 points wins the game';
+        const restartGame = document.querySelector('.restart_game');
+        restartGame.classList.add('active');
+        app.classList.remove('blur');
     }
 
 
