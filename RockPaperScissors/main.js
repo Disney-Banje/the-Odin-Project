@@ -54,9 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Creating a Welcome message after the user has entered his name, before playing the game...
     function createWelcomeMessage() {
-        const message = document.createElement('p');
+        const message = document.createElement('div');
         message.innerHTML = `
-        Hello, <strong>${playerName}</strong> ! Will you outsmart the rock, outwit the paper, or outmaneuver the scissors? Let the games begin!
+        <p>Hello, <strong>${playerName}</strong> ! Will you outsmart the rock, outwit the paper, or outmaneuver the scissors? Let the games begin!</p>
+
+        <div class="beat-container">  
+            <div class="beat-bubble beat-bubble-1"></div>
+            <div class="beat-bubble beat-bubble-2"></div>
+            <div class="beat-bubble beat-bubble-3"></div>
+        </div>
         `;
         container.appendChild(message);
 
@@ -171,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.classList.add('restart_btn');
         button.textContent = 'Restart';
         button.addEventListener('click', resetGame);
+
         restartGame.appendChild(gameWinner);
         restartGame.appendChild(button);    
         document.body.appendChild(restartGame);
