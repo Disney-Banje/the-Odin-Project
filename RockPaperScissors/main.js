@@ -152,11 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
         handIcons.forEach(item => {
             const button = document.createElement('button');
             button.addEventListener('click', (event) => {
-                if (event.target.classList.contains('rock')) {
+                if (event.target.matches('.rock')) {
                     fireGame('rock');
-                } else if (event.target.classList.contains('paper')) {
+                } else if (event.target.matches('.paper')) {
                     fireGame('paper');
-                } else if (event.target.classList.contains('scissors')) {
+                } else if (event.target.matches('.scissors')) {
                     fireGame('scissors');
                 }
             });
